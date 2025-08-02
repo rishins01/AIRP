@@ -1,0 +1,38 @@
+{% extends "base3.html" %}
+{% block titl %}Inventory{% endblock %}
+{% block content %}
+<head>
+    <style>
+        .rm {
+            text-align: left; 
+            margin-bottom: 20px; 
+        }
+        .item {
+            margin-bottom: 20px; 
+            border: 1px solid #ccc; 
+            padding: 15px; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="rm">
+            <a href="register" target="_blank"><button class="btn btn-primary">Add Items</button></a>
+        </div>
+        {% for item in products %}
+        <div class="product">
+            <h5>{{item.productname}}</h5>
+            <img src="{{item.image}}" alt="Image of {{item.productname}}" width="250" height="150">
+            <p>Description: {{item.description}}</p>            
+            <div class="price">Category: ${{item.category}}</div>
+            <div class="price">Quantity: ${{item.quantity}}</div>
+            <div class="price">Price: ${{item.price}}</div>
+            <form action="{{ url_for('add_to_cart', product_id=item.productID) }}" method="post">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock %}

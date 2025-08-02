@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Item Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .for {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+
+        .for h2 {
+            margin-bottom: 20px;
+        }
+
+        .group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="for">
+        <h2>Item Registration</h2>
+        <form action="{{ url_for('register_item') }}" method="POST">
+            <div class="group">
+                <input type="text" class="form-control" name="nm" placeholder="Item Name" required>
+            </div>
+            <div class="group">
+                <textarea class="form-control" name="desc" placeholder="Item Description" rows="3" required></textarea>
+            </div>
+            <div class="group">
+                <input type="number" class="form-control" name="price" placeholder="Price" required>
+            </div>
+            <div class="group">
+                <input type="number" class="form-control" name="quantity" placeholder="Quantity" required>
+            </div>
+            <div class="group">
+                <input type="text" class="form-control" name="img" placeholder="URL for the image" required>
+            </div>
+            <div class="group">
+                <select class="form-control" name="category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Books">Books</option>
+                    <!-- Add more categories as needed -->
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register Item</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

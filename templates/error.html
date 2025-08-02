@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <style>
+        body 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8d7da;
+            color: #721c24;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 
+        {
+            font-size: 2.5em;
+        }
+        p 
+        {
+            font-size: 1.2em;
+        }
+        .container 
+        {
+            padding: 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            background-color: #f8d7da;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Oops!</h1>
+        <p>Something went wrong.</p>
+        <p>Please try again later.</p>
+        <a href={{url_for('home')}}><button class="btn btn-primary btn-block">Return to Home Page</button></a>
+
+    </div>
+</body>
+</html>

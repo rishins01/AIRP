@@ -1,0 +1,134 @@
+{% extends "base1.html" %}
+{% block title %}Admin Page{% endblock %}
+{% block content %}
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            height: 100vh;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .graph {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            max-height: 600px;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        table {
+            width: 300px;
+            border-collapse: collapse;
+            margin-right: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th colspan="2" style="text-align: center">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in userss %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.username }}</td>
+                    <td>{{ i.type }}</td>
+                    {% if i.type == 'User' %}
+                    <td>
+                        <form action="{{ url_for('orders1', user_id=i.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-primary">View Orders</button>
+                        </form>
+                    </td>
+                    {% else %}
+                    <td>
+                        <form action="{{ url_for('orders1', user_id=i.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-primary">View Products</button>
+                        </form>
+                    </td>
+                    {% endif %}
+                    <td><button class="btn btn-danger">Remove User</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="graph">
+            <canvas id="myBarChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myBarChart').getContext('2d');
+        const myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Monthly Sales',
+                    data: [12, 19, 3, 5, 2, 3, 7],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base2.html" %}
+{% block titl %}Inventory{% endblock %}
+{% block content %}
+
+<head>
+    <style>
+        .no-items {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            width: 20rem;
+            /* Increased card width */
+            /* Card width */
+        }
+
+        .card-img-top {
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: space-between;
+            /* Added to distribute buttons evenly */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Your Products:</h1>
+
+        {% if products | length == 0 %}
+        <div class="no-items">No items in inventory.</div>
+        {% else %}
+        <div class="card-container">
+            {% for item in products %}
+            <div class="card">
+                <img src="{{ item.image }}" class="card-img-top" alt="Image of {{ item.productname }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.productname }}</h5>
+                    <p class="card-text">Description: {{ item.description }}</p>
+                    <p class="card-text">Category: {{ item.category }}</p>
+                    <p class="card-text">Quantity: {{ item.quantity }}</p>
+                    <p class="card-text">Price: ${{ item.price }}</p>
+
+                    <div class="button-container">
+                        <form action="{{ url_for('update_inventory', product_id=item.productID, action='increase') }}"
+                            method="post">
+                            <button class="btn btn-success" type="submit">Increase</button>
+                        </form>
+
+                        <form action="{{ url_for('update_inventory', product_id=item.productID, action='decrease') }}"
+                            method="post">
+                            <button class="btn btn-warning" type="submit">Decrease</button>
+                        </form>
+
+                        <form action="{{ url_for('update_inventory', product_id=item.productID, action='remove') }}"
+                            method="post">
+                            <button class="btn btn-danger" type="submit">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+{% endblock %}
